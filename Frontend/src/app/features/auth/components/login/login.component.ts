@@ -52,17 +52,21 @@ export class LoginComponent implements OnInit {
       const reqBody: LoginRequest = {
         email: formValue.email,
         password: formValue.password,
-        is_admin: formValue.isAdmin 
+        is_admin: formValue.isAdmin
       };
       this.authService.logInApi(reqBody).subscribe({
         next: (res: LoginResponse) => {
           this.user = res.user;
-          this.authService.setAuth(res)
-          this.authService.loadAuthFromStorage()
+          this.authService.setAuth(res);
+          this.authService.loadAuthFromStorage();
           this.router.navigateByUrl('/');
-
+        },
+        error: (err) => {
+          console.log("Login error:", err);
+          this.openSnackBar(err.error.msg || 'Sign Up failed');
         }
       });
+
 
     }
   }
@@ -82,6 +86,10 @@ export class LoginComponent implements OnInit {
           this.openSnackBar(res.msg || 'Account created');
           this.user = res.user;
           this.isLogin = true;
+        },
+        error: (err) => {
+          console.log("Login error:", err);
+          this.openSnackBar(err.error.msg || 'Login failed');
         }
       });
     }

@@ -133,9 +133,8 @@ export class EventCalendarComponent implements OnInit {
           ...event,
           start: new Date(event.start).toISOString(),
           end: new Date(event.end).toISOString()
-        }));
-
-
+        })
+        );
         this.categoryEvents = res.filter(
           (event, index, self) =>
             index === self.findIndex(e => e.title === event.title)
@@ -149,8 +148,10 @@ export class EventCalendarComponent implements OnInit {
         this.eventsData.forEach(event => {
           calendarApi.addEvent(event);
         });
-
       },
+      error: (err) => {
+        this.openSnackBar(err.error.msg || 'Events failed to load');
+      }
     });
   }
 
@@ -205,7 +206,7 @@ export class EventCalendarComponent implements OnInit {
         </div>
           `: ""
       }
-       
+
 
         <!--USER NAME -->
         <span>${this.userDetails.is_admin ? randomName : ""}</span>
@@ -455,7 +456,7 @@ export class EventCalendarComponent implements OnInit {
 
     // Filter events
     const filteredEvents = this.eventsData.filter(event => {
-      if (!category || category === 'All') return true; 
+      if (!category || category === 'All') return true;
       return event.title === category;
     });
 
@@ -471,13 +472,16 @@ export class EventCalendarComponent implements OnInit {
         this.openSnackBar(res?.msg)
         this.closeModal()
         this.reloadCalendar();
+      },
+      error: (err) => {
+        this.openSnackBar(err.error.msg || 'Event failed to add');
       }
     })
   }
 
   formatDateForApi(date: Date): string {
     const y = date.getFullYear();
-    const m = ('0' + (date.getMonth() + 1)).slice(-2); 
+    const m = ('0' + (date.getMonth() + 1)).slice(-2);
     const d = ('0' + date.getDate()).slice(-2);
     const h = ('0' + date.getHours()).slice(-2);
     const min = ('0' + date.getMinutes()).slice(-2);
@@ -492,6 +496,9 @@ export class EventCalendarComponent implements OnInit {
         this.openSnackBar(res?.msg)
         this.closeModal()
         this.reloadCalendar();
+      },
+      error: (err) => {
+        this.openSnackBar(err.error.msg || 'Sign Up failed');
       }
     })
   }
@@ -502,6 +509,9 @@ export class EventCalendarComponent implements OnInit {
         this.openSnackBar(res?.msg)
         this.closeModal()
         this.reloadCalendar();
+      },
+      error: (err) => {
+        this.openSnackBar(err.error.msg || 'Unsubscribe failed');
       }
     })
   }
