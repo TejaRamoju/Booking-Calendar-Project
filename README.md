@@ -1,58 +1,53 @@
-A full-stack web application built using Angular 14 (Frontend) and Python Flask (Backend). Users can view available event slots, apply preferences, and book events.
+# Booking Calendar Project
 
-Tech Stack
+A full-stack web application built using **Angular 14** (Frontend) and **Python Flask** (Backend).  
+Users can view available event slots, apply preferences, and book events.
 
-Frontend:
+---
 
-Angular 14
+## Tech Stack
 
-Angular Material
+### Frontend
+- Angular 14
+- Angular Material
+- TypeScript
+- RxJS
 
-TypeScript
+### Backend
+- Python Flask
+- SQLite
 
-RxJS
+---
 
-Backend:
+##  Setup Instructions
 
-Python Flask
+### 1️ Clone Repo
 
-SQLite
-
-Setup Instructions
-
-1️⃣ Clone Repo
-Run the following commands:
+```sh
 git clone https://github.com/TejaRamoju/Booking-Calendar-Project.git
-
 cd Booking-Calendar-Project
+```
 
-2️⃣ Backend Setup
-Navigate to the Backend folder and create a virtual environment:
 cd Backend
 python -m venv .venv
-
-Activate the virtual environment:
-
-Windows: source .venv/Scripts/activate
-
-Mac/Linux: source .venv/bin/activate
-
-Install dependencies:
+source .venv/Scripts/activate    # Windows
 pip install -r requirements.txt
-
-Run the backend server:
 python app.py
 
-The backend runs at http://127.0.0.1:5000
 
-3️⃣ Frontend Setup
-Navigate to the Frontend folder:
+### 2 Backend
+cd Backend
+python -m venv .venv
+source .venv/Scripts/activate    # Windows
+# or
+source .venv/bin/activate        # Mac/Linux
+
+pip install -r requirements.txt
+python app.py
+
+### 3 Frontend
+
 cd Frontend
-
-Install dependencies:
 npm install
-
-Run the frontend server:
 ng serve
 
-The frontend runs at http://localhost:4200
