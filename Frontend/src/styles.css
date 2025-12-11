@@ -1,0 +1,51 @@
+/* You can add global styles to this file, and also import other style files */
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  padding: 0;
+  overflow-y: hidden;
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+/* Mat padding insde input field */
+mat-form-field.mat-form-field.mat-form-field-appearance-outline > div.mat-form-field-wrapper > div.mat-form-field-flex > div.mat-form-field-infix  { padding: 0.45em 0px;  }
+mat-form-field.mat-form-field.mat-form-field-appearance-outline > div.mat-form-field-wrapper > div.mat-form-field-flex > div.mat-form-field-infix > span.mat-form-field-label-wrapper { top: -1.5em; }
+
+.mat-form-field-appearance-outline.mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label {
+    transform: translateY(-1.1em) scale(.75);
+    width: 133.33333%;
+}
+.mat-form-field-wrapper {
+  padding-bottom: 1.2em;
+}
+
+.mat-tab-label {
+  min-width:  13%!important;
+  max-width:  20%!important;
+  margin-right:0.1em!important;
+  /* padding: 5px; */
+}
+
+.mat-tab-label-active {
+  color: black!important;
+}
+
+.fc-toolbar-title {
+  font-size: 1.1em!important; /* adjust the size to your liking */
+}
+
+.fc-prev-button, .fc-next-button {
+
+  margin-right:1em!important;
+  padding: 4%!important;
+  background-color: #fff!important; /* adjust the color to your liking */
+  color: #007bff!important; /* adjust the text color to your liking */
+}
+
+

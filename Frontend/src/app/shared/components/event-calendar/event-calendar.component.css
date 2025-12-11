@@ -1,0 +1,31 @@
+.miniCalendar {
+  margin: 0 auto;
+  height: 80vh;
+}
+.event-indicators {
+  font-size: 14px;
+}
+
+.indicator-item {
+  display: flex;
+  align-items: center;
+}
+
+.indicator-circle {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.indicator-circle.open {
+  background-color: #7F00FF;
+}
+
+.indicator-circle.booked {
+  background-color: #228c71ff;
+}
+
+.indicator-circle.closed {
+  background-color: #7393B3;
+}

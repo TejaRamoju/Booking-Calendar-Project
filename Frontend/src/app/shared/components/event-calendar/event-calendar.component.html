@@ -1,0 +1,120 @@
+<app-navbar></app-navbar>
+<div class="event-indicators d-flex align-items-center gap-3 m-3 mt-0 justify-content-end">
+
+  <div class="indicator-item d-flex align-items-center gap-2">
+    <span class="indicator-circle open"></span>
+    <span>Open</span>
+  </div>
+
+  <div class="indicator-item d-flex align-items-center gap-2" *ngIf="!userDetails.is_admin">
+    <span class="indicator-circle booked"></span>
+    <span>Booked (You)</span>
+  </div>
+
+  <div class="indicator-item d-flex align-items-center gap-2">
+    <span class="indicator-circle closed"></span>
+    <span>{{ userDetails?.is_admin ? 'Filled' : 'Closed' }}</span>
+
+  </div>
+</div>
+
+<mat-card class="mat-elevation-z12 mx-3">
+  <full-calendar #calendar class="miniCalendar" [options]="calendarOptions"></full-calendar>
+</mat-card>
+<ng-template #eventDialog>
+  <form [formGroup]="form" class="mt-2">
+
+    <mat-dialog-content>
+      <!-- Admin -->
+      <div *ngIf="userDetails.is_admin">
+        <!-- EVENT CATEGORY -->
+        <mat-form-field style="width: 100%" appearance="outline">
+          <mat-label>Category</mat-label>
+
+          <mat-select formControlName="title" required>
+            <mat-option *ngFor="let event of categoryEvents" [value]="event.title">
+              {{ event.title }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <div>
+
+          <!--START TIME -->
+          <div style="display:flex;gap:1.5em;align-items:center;">
+
+            <mat-form-field appearance="outline">
+              <mat-label>Start Hour</mat-label>
+              <mat-select formControlName="startHour" (selectionChange)="onStartTimeChange()" required>
+                <mat-option *ngFor="let h of hoursList" [value]="h">{{ h }}</mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Start Minute</mat-label>
+              <mat-select formControlName="startMinute" (selectionChange)="onStartTimeChange()" required>
+                <mat-option *ngFor="let m of minutesList" [value]="m">{{ m }}</mat-option>
+              </mat-select>
+            </mat-form-field>
+
+          </div>
+
+          <!--END TIME -->
+          <div style="display:flex;gap:1.5em;align-items:center;">
+
+            <mat-form-field appearance="outline">
+              <mat-label>End Hour</mat-label>
+              <mat-select formControlName="endHour" (selectionChange)="onStartTimeChange()" required>
+                <mat-option *ngFor="let h of filteredEndHours" [value]="h">{{ h }}</mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>End Minute</mat-label>
+              <mat-select formControlName="endMinute" (selectionChange)="onStartTimeChange()" required>
+                <mat-option *ngFor="let m of filteredEndMinutes" [value]="m">{{ m }}</mat-option>
+              </mat-select>
+            </mat-form-field>
+
+          </div>
+        </div>
+      </div>
+      <!-- User -->
+
+      <div class="mt-0" *ngIf="!userDetails.is_admin">
+        <h4 class="mb-4">{{userBookedEvent.title}} </h4>
+        <h6 class="" *ngIf="!userDetails.is_admin && !userBookedEvent.booked">Slots Remaining: 01</h6>
+        <div class="d-flex flex-row">
+          <h6>{{userBookedEvent.start | date:'short'}}</h6>
+          <h6 class="mx-2">-</h6>
+          <h6 class="ml-0">{{userBookedEvent.end | date:'short'}}</h6>
+
+        </div>
+
+      </div>
+
+    </mat-dialog-content>
+
+    <!-- ACTION BUTTONS -->
+    <mat-dialog-actions align="end">
+
+      <button mat-button (click)="closeModal()">Cancel</button>
+
+
+      <button *ngIf="userDetails.is_admin" mat-raised-button color="primary" (click)="saveEvent()">
+        Save
+      </button>
+
+      <button *ngIf="!userDetails.is_admin && !userBookedEvent.booked" mat-raised-button color="primary"
+        (click)="eventSignUp()">
+        sign up
+      </button>
+
+      <button *ngIf="!userDetails.is_admin && userBookedEvent.booked" mat-raised-button color="primary"
+        (click)="eventUnSubscribe(userBookedEvent.id)">
+        Unsubscribe
+      </button>
+
+    </mat-dialog-actions>
+
+  </form>
+</ng-template>

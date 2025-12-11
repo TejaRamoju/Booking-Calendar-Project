@@ -1,0 +1,48 @@
+<div class="login-container mt-5">
+  <mat-card class="login-card mat-elevation-z8">
+    <mat-card-header>
+      <mat-card-title class="text-center">{{ isLogin ? 'Login' : 'Sign Up' }}</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+      <form [formGroup]="loginForm" (ngSubmit)="isLogin ? onLogin() : onSignUp()">
+
+        <!-- Email / Username -->
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Email</mat-label>
+          <input matInput placeholder="Enter your email" formControlName="email">
+          <mat-error *ngIf="loginForm.get('email')?.invalid">
+            Please enter a valid email
+          </mat-error>
+        </mat-form-field>
+
+        <!-- Password -->
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Password</mat-label>
+          <input matInput [type]="hide ? 'password' : 'text'" placeholder="Enter password" formControlName="password">
+          <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+            <mat-icon>{{ hide ? 'visibility_off' : 'visibility' }}</mat-icon>
+          </button>
+          <mat-error *ngIf="loginForm.get('password')?.invalid">Password is required</mat-error>
+        </mat-form-field>
+
+        <!-- Is Admin (only for Sign-Up) -->
+        <mat-checkbox formControlName="isAdmin" color="primary" *ngIf="!isLogin">Admin</mat-checkbox>
+
+        <!-- Toggle Link -->
+        <div class="signup-text">
+          <span *ngIf="isLogin">Don't have an account? </span>
+          <span *ngIf="!isLogin">Already have an account? </span>
+          <span class="signup-link" (click)="toggleLoginSignup()">{{ isLogin ? 'Sign Up' : 'Log In' }}</span>
+        </div>
+
+        <!-- Submit Button -->
+        <div class="login-actions">
+          <button mat-raised-button color="primary" class="full-width" type="submit" [disabled]="loginForm.invalid">
+            {{ isLogin ? 'Login' : 'Sign Up' }}
+          </button>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

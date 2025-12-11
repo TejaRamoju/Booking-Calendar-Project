@@ -1,0 +1,54 @@
+/* Center container */
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 60vh;
+}
+
+/* Card */
+.login-card {
+  width: 400px;
+  padding: 20px;
+  border-radius: 12px;
+}
+
+/* Full width for inputs and buttons */
+.full-width {
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+/* Center title */
+.text-center {
+  text-align: center;
+}
+
+/* Login button spacing */
+.login-actions {
+  margin-top: 16px;
+}
+.login-card mat-card-header {
+  display: flex;
+  justify-content: center; /* centers horizontally */
+}
+
+.login-card mat-card-title {
+  text-align: center; /* ensures title text is centered */
+}
+
+.signup-text {
+  text-align: center;
+  margin-top: 16px;
+  font-size: 0.95rem;
+}
+
+.signup-link {
+  color: #3f51b5;        /* Material primary color */
+  font-weight: 550;
+  cursor: pointer;
+}
+
+.signup-link:hover {
+  text-decoration: underline;
+}
